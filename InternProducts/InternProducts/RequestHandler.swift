@@ -9,18 +9,35 @@ import Foundation
 
 class RequestHandler {
 
-    func handler() {
-       let url = URL(string: "http://localhost:8080/login?username=admin&password=1234")!
+    var dictionary = [String:Any]()
+
+    
+
+    func handler(url: URL, completionHandler: @escaping ([String:Any]) -> Void) {
+       
        let session = URLSession(configuration: .default)
 
-       let dataTask = session.dataTask(with: url) { data, response, error in
+       let dataTask = session.dataTask(with: url) { [weak self] data, response, error in
+           guard let self = self else { return }
            if let error = error {
                print("Request error. Received: \(error)")
            } else if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                print("Request error, no 200 status. Received: \(response.statusCode)")
            } else if let data = data {
                // MARK: - process data
-               print(data)
+               do {
+                   guard let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                       print("Data serialization error: Unexpected data format")
+                       return
+                   }
+
+
+                   self.dictionary = jsonObject
+                   print(self.dictionary)
+               } catch {
+                   print("Data serialization error: \(error)")
+               }
+
            } else {
                print("Request error, unexpected condition")
            }
