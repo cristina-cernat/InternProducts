@@ -9,12 +9,19 @@ import UIKit
 
 class ProductsViewController: UIViewController {
 
+    struct Constant {
+        static let productCellIdentifier = "ProductCell"
+    }
+
     @IBOutlet weak var tableView: UITableView!
     var products = [[String: Any]]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: Constant.productCellIdentifier)
 
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
 
     }
     
@@ -36,12 +43,19 @@ extension ProductsViewController: UITableViewDelegate {
         1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        products.count
+        //products.count
+        return 1
     }
 }
 
 extension ProductsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let productCell = tableView.dequeueReusableCell(withIdentifier: Constant.productCellIdentifier, for: indexPath) as? ProductTableViewCell else {
+            print("UI error: Cell dequeing resulted in an unexpected instance")
+            return UITableViewCell()
+        }
+
+        productCell.titleLabel.text = "It works!"
         return UITableViewCell()
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xsn-CJ-w20">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -87,7 +87,7 @@
         <!--Products View Controller-->
         <scene sceneID="NhO-Zr-Mh3">
             <objects>
-                <viewController id="Xsn-CJ-w20" customClass="ProductsViewController" sceneMemberID="viewController">
+                <viewController id="Xsn-CJ-w20" customClass="ProductsViewController" customModule="InternProducts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Uv-1f-lZW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,7 +119,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="OyQ-50-Pg3" id="2QU-ib-ou5"/>
+                        <outlet property="tableView" destination="OyQ-50-Pg3" id="NVu-3L-4Sb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mP-5e-McK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
