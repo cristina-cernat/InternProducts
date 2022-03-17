@@ -20,8 +20,10 @@ class ProductsViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: Constant.productCellIdentifier)
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        //self.tableView.delegate = self
+       // self.tableView.dataSource = self
+
+       // self.view.addSubview(tableView)
 
     }
     
@@ -56,6 +58,6 @@ extension ProductsViewController: UITableViewDataSource {
         }
 
         productCell.titleLabel.text = "It works!"
-        return UITableViewCell()
+        return productCell
     }
 }
