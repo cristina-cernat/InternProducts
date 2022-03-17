@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="InternProducts" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="InternProducts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,6 +83,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="20" y="84"/>
+        </scene>
+        <!--Products View Controller-->
+        <scene sceneID="NhO-Zr-Mh3">
+            <objects>
+                <viewController id="Xsn-CJ-w20" customClass="ProductsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Uv-1f-lZW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OyQ-50-Pg3">
+                                <rect key="frame" x="0.0" y="167" width="414" height="695"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xsn-CJ-w20" id="MPV-xs-Unl"/>
+                                    <outlet property="delegate" destination="Xsn-CJ-w20" id="g3Q-Vc-S2c"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7uy-Rg-Dyg">
+                                <rect key="frame" x="125.5" y="69" width="163" height="48"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eUg-UX-EKW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7uy-Rg-Dyg" firstAttribute="top" secondItem="eUg-UX-EKW" secondAttribute="top" constant="25" id="0bL-K2-tdT"/>
+                            <constraint firstItem="eUg-UX-EKW" firstAttribute="trailing" secondItem="OyQ-50-Pg3" secondAttribute="trailing" id="61b-HF-GFX"/>
+                            <constraint firstItem="eUg-UX-EKW" firstAttribute="bottom" secondItem="OyQ-50-Pg3" secondAttribute="bottom" id="7C3-eA-vca"/>
+                            <constraint firstItem="7uy-Rg-Dyg" firstAttribute="centerX" secondItem="eUg-UX-EKW" secondAttribute="centerX" id="QMg-pq-yZB"/>
+                            <constraint firstItem="OyQ-50-Pg3" firstAttribute="leading" secondItem="eUg-UX-EKW" secondAttribute="leading" id="hxb-lY-uNH"/>
+                            <constraint firstItem="OyQ-50-Pg3" firstAttribute="top" secondItem="7uy-Rg-Dyg" secondAttribute="bottom" constant="50" id="sJv-HT-08s"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="OyQ-50-Pg3" id="2QU-ib-ou5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9mP-5e-McK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="84"/>
         </scene>
     </scenes>
     <resources>
