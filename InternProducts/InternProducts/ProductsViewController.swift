@@ -13,17 +13,21 @@ class ProductsViewController: UIViewController {
         static let productCellIdentifier = "ProductCell"
     }
 
+
     @IBOutlet weak var tableView: UITableView!
-    var products = [[String: Any]]()
+    var myProducts = [Product]()
 
     let session = URLSession(configuration: .default)
-    var dictionary = [String:Any]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: Constant.productCellIdentifier)
 
+        
+
         let url = URL(string: "http://localhost:8080/products?loginToken=668961808.772846")!
+
         // MARK: - treat the request
         let dataTask = session.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -31,19 +35,28 @@ class ProductsViewController: UIViewController {
             } else if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                 print("Request error, no 200 status. Received: \(response.statusCode)")
             } else if let data = data {
-                // MARK: - process data
+
+                // MARK: - have data
+
+                var result: Response?
                 do {
-                       guard let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-                           print("Data serialization error: Unexpected data format")
-                           return
-                       }
+                    result = try JSONDecoder().decode(Response.self, from: data)
+                } catch {
+                    print("failed to convert \(error.localizedDescription)")
+                }
 
-                       self.dictionary = jsonObject
-                       print(self.dictionary)
+                // json = our serialized data
+                guard let json = result else {
+                    return
+                }
+                print(json.status)
+                print(json.products[0].title)
+                self.myProducts = json.products
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
 
-                   } catch {
-                       print("Data serialization error: \(error)")
-                   }
+
             } else {
                 print("Request error, unexpected condition")
             }
@@ -51,20 +64,7 @@ class ProductsViewController: UIViewController {
 
         dataTask.resume()
      }
-
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+//prepare
 }
 
 extension ProductsViewController: UITableViewDelegate {
@@ -72,8 +72,7 @@ extension ProductsViewController: UITableViewDelegate {
         1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //products.count
-        return 1
+        myProducts.count
     }
 }
 
@@ -84,7 +83,31 @@ extension ProductsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        productCell.titleLabel.text = "It works!"
+//        var title: String?
+//        var description: String?
+
+//        let products = dictionary["products"] as? [[String: Any]]
+//        print(products)
+
+        let product = myProducts[indexPath.row]
+        productCell.titleLabel.text = product.title
+        productCell.descriptionLabel.text = product.description
+        let tagsString: String = "taggg"
+        productCell.tagsLabel.text = tagsString
         return productCell
     }
 }
+
+struct Response: Codable {
+    let status: String
+    let products: [Product]
+}
+
+struct Product: Codable {
+    let tags: [String]
+    let title: String
+    let image: URL
+    let description: String
+    let date: Date
+}
+
