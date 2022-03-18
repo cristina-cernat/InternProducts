@@ -50,7 +50,6 @@ class ProductsViewController: UIViewController {
                     return
                 }
                 print(json.status)
-                print(json.products[0].title)
                 self.myProducts = json.products
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -83,17 +82,11 @@ extension ProductsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-//        var title: String?
-//        var description: String?
-
-//        let products = dictionary["products"] as? [[String: Any]]
-//        print(products)
-
         let product = myProducts[indexPath.row]
         productCell.titleLabel.text = product.title
         productCell.descriptionLabel.text = product.description
-        let tagsString: String = "taggg"
-        productCell.tagsLabel.text = tagsString
+        let joined = product.tags.joined(separator: ", ")
+        productCell.tagsLabel.text = joined
         return productCell
     }
 }
