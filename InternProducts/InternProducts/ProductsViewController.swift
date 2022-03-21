@@ -42,15 +42,16 @@ class ProductsViewController: UIViewController {
                 do {
                     result = try JSONDecoder().decode(Response.self, from: data)
                 } catch {
-                    print("failed to convert \(error.localizedDescription)")
+                    print("failed to convert JSON \(error.localizedDescription)")
                 }
 
-                // json = our serialized data
+                // json = our decoded data
                 guard let json = result else {
                     return
                 }
                 print(json.status)
                 self.myProducts = json.products
+
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -63,6 +64,41 @@ class ProductsViewController: UIViewController {
 
         dataTask.resume()
      }
+//    private func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+//        //let url = myProducts[index].image
+//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+//    }
+//    private func downloadImage(from url: URL) {
+//        print("Downloading image...")
+//        getImageData(from: url) { data, response, error in
+//            guard let data = data, error == nil else { return }
+//            print("Download finished")
+//
+//            DispatchQueue.main.async() { [weak self] in
+//                self?.tableView.reloadData()
+//            }
+//        }
+//    }
+
+    @discardableResult private func downloadImage(url: URL, with completionHandler: @escaping (Data)->()) -> URLSessionDataTask {
+        //let url = URL(string: image.url)!
+        let imageDataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            // ASYNC-Called CODE
+            if let error = error {
+                print("Download image error received: \(error)")
+            } else if let data = data {
+                DispatchQueue.main.async {
+                    completionHandler(data)
+                }
+            } else {
+                print("Download image error: Unexpected condition!")
+            }
+        }
+        imageDataTask.resume()
+        return imageDataTask
+    }
+
+
 //prepare
 }
 
@@ -88,7 +124,21 @@ extension ProductsViewController: UITableViewDataSource {
         let joined = product.tags.joined(separator: ", ")
         productCell.tagsLabel.text = joined
         return productCell
+//        downloadImage(from: product.image)
+
+         if let imageData = product.imageData {
+            productCell.productImageView?.image = UIImage(data: imageData)
+        } else {
+            downloadImage(url: product.image) {[weak self] data in
+            // ASYNC-Called CODE
+            self?.myProducts[indexPath.row].imageData = data
+            tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
+        //productCell.productImageView.image = try! UIImage(data: Data(contentsOf: product.image))
+
     }
+
 }
 
 struct Response: Codable {
@@ -102,5 +152,8 @@ struct Product: Codable {
     let image: URL
     let description: String
     let date: Date
+
+    var imageData: Data?
 }
+
 
