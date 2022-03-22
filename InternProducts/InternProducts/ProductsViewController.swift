@@ -18,6 +18,7 @@ class ProductsViewController: UIViewController {
     var myProducts = [Product]()
 
     let session = URLSession(configuration: .default)
+    let url = URL(string: "http://localhost:8080/products?loginToken=668961808.772846")!
 
 
     override func viewDidLoad() {
@@ -26,7 +27,6 @@ class ProductsViewController: UIViewController {
 
         
 
-        let url = URL(string: "http://localhost:8080/products?loginToken=668961808.772846")!
 
         // MARK: - treat the request
         let dataTask = session.dataTask(with: url) { data, response, error in
@@ -64,40 +64,12 @@ class ProductsViewController: UIViewController {
 
         dataTask.resume()
      }
-//    private func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-//        //let url = myProducts[index].image
-//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-//    }
-//    private func downloadImage(from url: URL) {
-//        print("Downloading image...")
-//        getImageData(from: url) { data, response, error in
-//            guard let data = data, error == nil else { return }
-//            print("Download finished")
-//
-//            DispatchQueue.main.async() { [weak self] in
-//                self?.tableView.reloadData()
-//            }
-//        }
-//    }
 
-    @discardableResult private func downloadImage(url: URL, with completionHandler: @escaping (Data)->()) -> URLSessionDataTask {
-        //let url = URL(string: image.url)!
-        let imageDataTask = URLSession.shared.dataTask(with: url) { data, response, error in
-            // ASYNC-Called CODE
-            if let error = error {
-                print("Download image error received: \(error)")
-            } else if let data = data {
-                DispatchQueue.main.async {
-                    completionHandler(data)
-                }
-            } else {
-                print("Download image error: Unexpected condition!")
-            }
-        }
-        imageDataTask.resume()
-        return imageDataTask
+
+    func convertBase64ToImage(imageString: String) -> UIImage {
+        let imageData = Data(base64Encoded: imageString, options: Data.Base64DecodingOptions.ignoreUnknownCharacters)!
+        return UIImage(data: imageData)!
     }
-
 
 //prepare
 }
@@ -123,19 +95,10 @@ extension ProductsViewController: UITableViewDataSource {
         productCell.descriptionLabel.text = product.description
         let joined = product.tags.joined(separator: ", ")
         productCell.tagsLabel.text = joined
-        return productCell
-//        downloadImage(from: product.image)
 
-         if let imageData = product.imageData {
-            productCell.productImageView?.image = UIImage(data: imageData)
-        } else {
-            downloadImage(url: product.image) {[weak self] data in
-            // ASYNC-Called CODE
-            self?.myProducts[indexPath.row].imageData = data
-            tableView.reloadRows(at: [indexPath], with: .fade)
-            }
-        }
-        //productCell.productImageView.image = try! UIImage(data: Data(contentsOf: product.image))
+        productCell.productImageView.image = convertBase64ToImage(imageString: product.image)
+        return productCell
+
 
     }
 
@@ -149,7 +112,7 @@ struct Response: Codable {
 struct Product: Codable {
     let tags: [String]
     let title: String
-    let image: URL
+    let image: String
     let description: String
     let date: Date
 
