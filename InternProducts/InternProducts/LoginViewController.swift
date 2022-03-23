@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     var username: String = ""
     var password: String = ""
 
-    var urlString = "http://localhost:8080/"
+    var urlString = ""
 
     override func viewDidLoad() {
        super.viewDidLoad()
@@ -33,20 +33,24 @@ class LoginViewController: UIViewController {
     @IBAction func loginButton(_ sender: UIButton) {
         print("login touched")
 
+        urlString = "http://localhost:8080/"
+        
         if let userText = usernameTextField.text {
-            self.username += userText
+            self.username = userText
             print(self.username)
             self.urlString += "login?username="
             self.urlString += self.username
         }
 
         if let passwordText = passwordTextField.text {
-            self.password += passwordText
+            self.password = passwordText
             print(self.password)
             self.urlString += "&password="
             self.urlString += self.password
         }
 
+        print("loginButton func, urlString: ")
+        print(urlString)
 
         request(url: urlString)
 
@@ -71,8 +75,9 @@ class LoginViewController: UIViewController {
                            return
                        }
 
-                       self.dictionary = jsonObject
-                        print("func request: ")
+                    self.dictionary = jsonObject
+                    print("func request: ")
+                    print(jsonObject)
                     self.loginToken = jsonObject["loginToken"] as? String
                     print(self.loginToken ?? "no token")
                     if let status = jsonObject["status"] as? String {
@@ -83,7 +88,12 @@ class LoginViewController: UIViewController {
                                 vc.token = self.loginToken ?? "no"
                                 self.present(vc, animated: true)
                             }
+                        } else {
+                            if let message = jsonObject["message"] as? String {
+                                self.showAlert(with: message)
+                            }
                         }
+
                     }
 
                    } catch {
@@ -97,4 +107,18 @@ class LoginViewController: UIViewController {
        // return dataTask
 
     }
+
+    func showAlert(with message: String) {
+        let text = message
+
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "", message: "\(text)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { action in
+                print("tapped OK")
+            }))
+            self.present(alert, animated: true)
+        }
+
+    }
+
 }
