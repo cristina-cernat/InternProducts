@@ -18,15 +18,17 @@ class ProductsViewController: UIViewController {
     var myProducts = [Product]()
 
     let session = URLSession(configuration: .default)
-    let url = URL(string: "http://localhost:8080/products?loginToken=668961808.772846")!
-
+    var token = ""
+    var urlString = "http://localhost:8080/products?loginToken="
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: Constant.productCellIdentifier)
 
-        
-
+        self.urlString += token
+        let url = URL(string: urlString)!
+        print("in viewDidLoad()")
+        print(self.urlString)
 
         // MARK: - treat the request
         let dataTask = session.dataTask(with: url) { data, response, error in

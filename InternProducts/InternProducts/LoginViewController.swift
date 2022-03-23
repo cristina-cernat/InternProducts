@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
 
     let session = URLSession(configuration: .default)
     var dictionary = [String:Any]()
+    var loginToken: String?
 
     var username: String = ""
     var password: String = ""
@@ -71,7 +72,19 @@ class LoginViewController: UIViewController {
                        }
 
                        self.dictionary = jsonObject
-                       print(self.dictionary)
+                        print("func request: ")
+                    self.loginToken = jsonObject["loginToken"] as? String
+                    print(self.loginToken ?? "no token")
+                    if let status = jsonObject["status"] as? String {
+                        if status == "SUCCESS" {
+                            DispatchQueue.main.async {
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "productScreen") as! ProductsViewController
+                                vc.modalPresentationStyle = .fullScreen
+                                vc.token = self.loginToken ?? "no"
+                                self.present(vc, animated: true)
+                            }
+                        }
+                    }
 
                    } catch {
                        print("Data serialization error: \(error)")
