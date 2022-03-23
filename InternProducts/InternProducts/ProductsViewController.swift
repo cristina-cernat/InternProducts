@@ -65,6 +65,10 @@ class ProductsViewController: UIViewController {
         }
 
         dataTask.resume()
+
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.startAnimating()
+        tableView.backgroundView = spinner
      }
 
 
