@@ -52,7 +52,6 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="registerButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AIj-C7-wNT"/>
                                     <segue destination="pya-4U-Zmc" kind="show" id="War-ij-0fQ"/>
                                 </connections>
                             </button>
@@ -150,12 +149,12 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pqy-wg-Z6T">
                                 <rect key="frame" x="20" y="365" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ok9-GR-V6q">
                                 <rect key="frame" x="20" y="424" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MFX-Df-2rt">
                                 <rect key="frame" x="20" y="498" width="374" height="36"/>
@@ -163,19 +162,31 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Register">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapRegisterButton:" destination="pya-4U-Zmc" eventType="touchUpInside" id="gMM-Ih-d8F"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords must match!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9D-af-UTD">
+                                <rect key="frame" x="20" y="463" width="374" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Inw-zs-AC4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Inw-zs-AC4" firstAttribute="trailing" secondItem="D9D-af-UTD" secondAttribute="trailing" constant="20" id="9zX-tB-xmc"/>
                             <constraint firstItem="MFX-Df-2rt" firstAttribute="top" secondItem="Ok9-GR-V6q" secondAttribute="bottom" constant="40" id="Cd7-02-tT7"/>
                             <constraint firstItem="Ok9-GR-V6q" firstAttribute="top" secondItem="pqy-wg-Z6T" secondAttribute="bottom" constant="25" id="E7e-Yf-n90"/>
                             <constraint firstItem="MFX-Df-2rt" firstAttribute="leading" secondItem="Inw-zs-AC4" secondAttribute="leading" constant="20" id="F9w-A5-d1L"/>
                             <constraint firstItem="pqy-wg-Z6T" firstAttribute="top" secondItem="VLX-fF-rgb" secondAttribute="bottom" constant="25" id="LYg-KV-mhm"/>
+                            <constraint firstItem="D9D-af-UTD" firstAttribute="top" secondItem="Ok9-GR-V6q" secondAttribute="bottom" constant="5" id="OPo-LP-ICp"/>
                             <constraint firstItem="Inw-zs-AC4" firstAttribute="trailing" secondItem="VLX-fF-rgb" secondAttribute="trailing" constant="20" id="QJ8-l8-UaQ"/>
                             <constraint firstItem="Inw-zs-AC4" firstAttribute="trailing" secondItem="MFX-Df-2rt" secondAttribute="trailing" constant="20" id="SbB-Kg-0a2"/>
                             <constraint firstItem="VLX-fF-rgb" firstAttribute="leading" secondItem="Inw-zs-AC4" secondAttribute="leading" constant="20" id="VNA-vC-8bz"/>
                             <constraint firstItem="fpr-DY-qQ1" firstAttribute="top" secondItem="Inw-zs-AC4" secondAttribute="top" constant="70" id="XLv-Km-1Ny"/>
+                            <constraint firstItem="D9D-af-UTD" firstAttribute="leading" secondItem="Inw-zs-AC4" secondAttribute="leading" constant="20" id="Xqp-l4-zLC"/>
                             <constraint firstItem="Ok9-GR-V6q" firstAttribute="leading" secondItem="Inw-zs-AC4" secondAttribute="leading" constant="20" id="c6d-Gx-8zS"/>
                             <constraint firstItem="VLX-fF-rgb" firstAttribute="top" secondItem="fpr-DY-qQ1" secondAttribute="bottom" constant="100" id="eaB-o9-75C"/>
                             <constraint firstItem="fpr-DY-qQ1" firstAttribute="centerX" secondItem="tsI-hA-E5d" secondAttribute="centerX" id="gt3-2G-vGw"/>
@@ -185,6 +196,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="nS0-6L-ZJC"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="Ok9-GR-V6q" id="YNM-lQ-n07"/>
+                        <outlet property="passwordTextField" destination="pqy-wg-Z6T" id="7l9-k5-C4M"/>
+                        <outlet property="passwordsMustMatchLabel" destination="D9D-af-UTD" id="Moa-yP-eVa"/>
+                        <outlet property="usernameTextField" destination="VLX-fF-rgb" id="0FD-q2-ZAM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvA-rn-tFa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -212,6 +229,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

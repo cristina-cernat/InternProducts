@@ -52,15 +52,13 @@ class LoginViewController: UIViewController {
         print("loginButton func, urlString: ")
         print(urlString)
 
-        request(url: urlString)
+        productsRequest(url: urlString)
 
 
     }
 
-    @IBAction func registerButton(_ sender: UIButton) {
-    }
 
-    func request(url: String) {
+    func productsRequest(url: String) {
         let url = URL(string: url)!
         let dataTask = session.dataTask(with: url) { data, response, error in
             if let error = error {
