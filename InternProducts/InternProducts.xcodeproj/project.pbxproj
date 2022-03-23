@@ -16,6 +16,7 @@
 		2C3F916F27E31E090083962D /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3F916E27E31E090083962D /* ProductsViewController.swift */; };
 		2C3F917227E322320083962D /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3F917027E322320083962D /* ProductTableViewCell.swift */; };
 		2C3F917327E322320083962D /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3F917127E322320083962D /* ProductTableViewCell.xib */; };
+		2CF25FB027EB1D6400455502 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF25FAF27EB1D6400455502 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		2C3F916E27E31E090083962D /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		2C3F917027E322320083962D /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		2C3F917127E322320083962D /* ProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		2CF25FAF27EB1D6400455502 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,13 +64,13 @@
 		2C3F915627DB825D0083962D /* InternProducts */ = {
 			isa = PBXGroup;
 			children = (
-				2CF25F6827E475AD00455502 /* Model */,
 				2C3F917427E3225A0083962D /* Views */,
 				2C3F915927DB825D0083962D /* SceneDelegate.swift */,
 				2C3F915B27DB825D0083962D /* LoginViewController.swift */,
+				2CF25FAF27EB1D6400455502 /* RegisterViewController.swift */,
+				2C3F916E27E31E090083962D /* ProductsViewController.swift */,
 				2C3F915D27DB825D0083962D /* Main.storyboard */,
 				2C3F916527DB82640083962D /* Info.plist */,
-				2C3F916E27E31E090083962D /* ProductsViewController.swift */,
 				2C3F916B27DB83B40083962D /* Supporting files */,
 			);
 			path = InternProducts;
@@ -91,13 +93,6 @@
 				2C3F917127E322320083962D /* ProductTableViewCell.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2CF25F6827E475AD00455502 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +170,7 @@
 				2C3F915C27DB825D0083962D /* LoginViewController.swift in Sources */,
 				2C3F915827DB825D0083962D /* AppDelegate.swift in Sources */,
 				2C3F917227E322320083962D /* ProductTableViewCell.swift in Sources */,
+				2CF25FB027EB1D6400455502 /* RegisterViewController.swift in Sources */,
 				2C3F916F27E31E090083962D /* ProductsViewController.swift in Sources */,
 				2C3F915A27DB825D0083962D /* SceneDelegate.swift in Sources */,
 			);

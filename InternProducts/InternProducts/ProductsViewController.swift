@@ -63,7 +63,6 @@ class ProductsViewController: UIViewController {
                 print("Request error, unexpected condition")
             }
         }
-
         dataTask.resume()
 
         let spinner = UIActivityIndicatorView(style: .large)
