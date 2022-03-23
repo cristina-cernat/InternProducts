@@ -12,9 +12,19 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        titleLabel.text = titleText
+        productImageView.image = productImage
+        descriptionTextView.text = descriptionText
+        tagsLabel.text = tagsText
    }
-    
+
+    var titleText = ""
+    var productImage = UIImage()
+    var descriptionText = ""
+    var tagsText = ""
+
     @IBAction func didCloseButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,4 +34,5 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
 
     @IBOutlet weak var tagsLabel: UILabel!
+
 }

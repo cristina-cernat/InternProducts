@@ -107,6 +107,20 @@ extension ProductsViewController: UITableViewDataSource {
 
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "productDetailScreen") as! ProductDetailViewController
+
+        let product = myProducts[indexPath.row]
+        vc.titleText = product.title
+        vc.productImage = convertBase64ToImage(imageString: product.image)
+        vc.descriptionText = product.description
+        let joined = product.tags.joined(separator: ", ")
+        vc.tagsText = joined
+
+        present(vc, animated: true)
+
+    }
+
 }
 
 struct Response: Codable {
