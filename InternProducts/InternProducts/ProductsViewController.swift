@@ -115,8 +115,6 @@ struct Product: Codable {
     let image: String
     let description: String
     let date: Date
-
-    var imageData: Data?
 }
 
 
